@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 // 主页 帮助页 关于页路由
-Route::get('/','StaticPagesController@home');
-Route::get('/help','StaticPagesController@help');
-Route::get('/about','StaticPagesController@about');
+Route::get('/','StaticPagesController@home')->name('home');
+Route::get('/help','StaticPagesController@help')->name('help');
+Route::get('/about','StaticPagesController@about')->name('about');
+
+// 用户注册,登录等相关路由
+Route::get('signup','UsersController@create')->name('signup');
