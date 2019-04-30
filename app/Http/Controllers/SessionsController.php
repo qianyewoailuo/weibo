@@ -26,6 +26,7 @@ class SessionsController extends Controller
         } else {
             // 失败认证
             session()->flash('danger','很抱歉,您的邮箱和密码不匹配');
+            // withInput表示保留之前用户的输入
             return redirect()->back()->withInput();
         }
         return;
