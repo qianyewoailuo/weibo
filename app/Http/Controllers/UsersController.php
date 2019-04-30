@@ -8,6 +8,22 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        // 中间件验证除了show create store方法
+        // 安全起见,使用excep黑名单验证相对用only白名单验证为最佳实践
+        // 用户未通过身份验证，默认将会被重定向到 /login 登录页面 可在中间件文件夹中的Authenticate.php中修改
+        $this->middleware('auth',[
+            'except' => ['show','create','store']
+        ]);
+
+        // 限制只能游客访问注册页面
+        // 默认会重定向到/home页面,可在app\Middleware\RedirectIfAuthenticated.php修改
+        $this->middleware('guest',[
+            'only' => ['create']
+        ]);
+    }
+
     // 创建用户
     public function create()
     {
@@ -47,12 +63,15 @@ class UsersController extends Controller
     // 用户编辑
     public function edit(User $user)
     {
+        $this->authorize('update',$user);
         return view('users.edit',compact('user'));
     }
 
     // 用户更新
     public function update(User $user, Request $request)
     {
+        // 策略授权认证
+        $this->authorize('update',$user);
         // 验证数据
         $this->validate($request,[
             'name'  =>  'required|max:50',

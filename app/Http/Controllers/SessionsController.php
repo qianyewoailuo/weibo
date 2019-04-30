@@ -7,6 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
+    public function __construct()
+    {
+        // 访客中间件控制只有游客才可访问登录页面
+        $this->middleware('guest',[
+            'only'  =>  ['create']
+        ]);
+    }
+
     public function create()
     {
         return view('sessions.create');
@@ -22,7 +30,12 @@ class SessionsController extends Controller
         if (Auth::attempt($credentials,$request->has('remember'))) {
             // 成功认证
             session()->flash('success','欢迎回来!');
-            return redirect()->route('users.show',[Auth::user()]);
+            // 优化登录重定向
+            // 默认重定向地址
+            $fallback = route('users.show',[Auth::user()]);
+            // 当上次请求的记录为空时重定向到默认地址
+            return redirect()->intended($fallback);
+            // return redirect()->route('users.show',[Auth::user()]);
         } else {
             // 失败认证
             session()->flash('danger','很抱歉,您的邮箱和密码不匹配');

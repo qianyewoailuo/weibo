@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Models\User;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        // 将自定义的授权策略添加到AuthServiceProvider中
+        // 其实也可以按照上面的写法不必引用
+        // 'App\Models\User' => 'App\Policies\UserPolicy',
+        User::class => UserPolicy::class,
     ];
 
     /**
