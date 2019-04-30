@@ -14,7 +14,7 @@ class UsersController extends Controller
         // 安全起见,使用excep黑名单验证相对用only白名单验证为最佳实践
         // 用户未通过身份验证，默认将会被重定向到 /login 登录页面 可在中间件文件夹中的Authenticate.php中修改
         $this->middleware('auth',[
-            'except' => ['show','create','store']
+            'except' => ['show','create','store','index']
         ]);
 
         // 限制只能游客访问注册页面
@@ -32,6 +32,16 @@ class UsersController extends Controller
         // 获取所有用户
         // $users = User::all();
         return view('Users.index',compact('users'));
+    }
+    // 用户删除
+    public function destroy(User $user)
+    {
+        // 删除策略授权
+        $this->authorize('destroy',$user);
+        $username = $user->name;
+        $user->delete();
+        session()->flash('success','用户'.$username.'已被成功删除');
+        return back();
     }
 
     // 创建用户(注册)
