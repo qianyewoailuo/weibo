@@ -24,7 +24,17 @@ class UsersController extends Controller
         ]);
     }
 
-    // 创建用户
+    // 显示用户列表
+    public function index()
+    {
+        // 获取分页数据
+        $users = User::paginate(10);
+        // 获取所有用户
+        // $users = User::all();
+        return view('Users.index',compact('users'));
+    }
+
+    // 创建用户(注册)
     public function create()
     {
         return view('users.create');
