@@ -22,3 +22,6 @@ Route::get('/about','StaticPagesController@about')->name('about');
 
 // 用户注册,登录等相关路由
 Route::get('signup','UsersController@create')->name('signup');
+
+// 用戶资源路由
+Route::resource('users','UsersController');
