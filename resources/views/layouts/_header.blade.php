@@ -4,7 +4,7 @@
     <ul class="navbar-nav justify-content-end">
       <!-- 使用route()生成路由 -->
       <li class="nav-item"><a class="nav-link" href="{{ route('help') }}">帮助</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">登录</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
     </ul>
   </div>
 </nav>
