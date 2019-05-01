@@ -37,6 +37,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // 一个用户拥有多条微博
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+
     // 头像获取
     public function gravatar($size = '100')
     {
