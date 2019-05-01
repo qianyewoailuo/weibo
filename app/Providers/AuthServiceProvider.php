@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\User;
 use App\Policies\UserPolicy;
+use App\Models\Status;
+use App\Policies\StatusPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         // 其实也可以按照上面的写法不必引用
         // 'App\Models\User' => 'App\Policies\UserPolicy',
         User::class => UserPolicy::class,
+        Status::class => StatusPolicy::class
     ];
 
     /**
