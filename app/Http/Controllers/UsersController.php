@@ -29,10 +29,10 @@ class UsersController extends Controller
     public function index()
     {
         // 获取分页数据
-        $users = User::paginate(10);
+        // $users = User::paginate(10);
         // 获取所有用户
-        // $users = User::all();
-        return view('Users.index',compact('users'));
+        $users = User::all();
+        return view('users.index',compact('users'));
     }
     // 用户删除
     public function destroy(User $user)

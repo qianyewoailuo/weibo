@@ -9,9 +9,9 @@
     <!-- 局部视图细分 -->
       @include('users._user')
     @endforeach
-    <div class="mt-3">
+    <!-- <div class="mt-3">
       {!! $users->render() !!}
-    </div>
+    </div> -->
   </div>
 </div>
 @stop
