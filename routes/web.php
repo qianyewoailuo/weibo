@@ -47,3 +47,6 @@ Route::resource('statuses','StatusesController',['only'=>['store','destroy']]);
  * DELETE   /statuses   StatusesController@destroy	处理删除微博的请求
  */
 
+// 关注人列表与粉丝列表路由
+Route::get('users/{user}/followings','UsersController@followings')->name('users.followings');
+Route::get('users/{user}/followers','UsersController@followers')->name('users.followers');

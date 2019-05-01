@@ -58,6 +58,21 @@ class UsersController extends Controller
         $statuses = $user->statuses()->orderBy('created_at','desc')->paginate(10);
         return view('users.show', compact('user','statuses'));
     }
+    // 显示用户关注信息
+    public function followings(User $user)
+    {
+        $users = $user->followings()->paginate(20);
+        $title = $user->name. '关注的人';
+        return view('users.show_follow',compact('users','title'));
+    }
+    // 显示用户粉丝信息
+    public function followers(User $user)
+    {
+        $users = $user->followers()->paginate(20);
+        $title = $user->name. '的粉丝';
+        return view('users.show_follow',compact('users','title'));
+    }
+
 
     // 保存注册信息
     public function store(Request $request)
