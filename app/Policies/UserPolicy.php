@@ -27,8 +27,13 @@ class UserPolicy
     }
 
     // 删除策略授权
-    public function destroy(User $currentUser,User $user)
+    public function destroy(User $currentUser, User $user)
     {
         return $currentUser->is_admin && $currentUser->id !== $user->id;
+    }
+    // 关注授权策略
+    public function follow(User $currentUser, User $user)
+    {
+        return $currentUser->id !== $user->id;
     }
 }

@@ -77,7 +77,8 @@ class User extends Authenticatable
     public function isFollowing($user_id)
     {
         // contains()是进阶-集合中判断集合中是否含有的方法
-        return $this->followings()->contains($user_id);
+        // 注意这里要使用contains()必须要前面返回一个结果集而不是关系对象
+        return $this->followings->contains($user_id);
     }
 
 

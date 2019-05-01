@@ -7,6 +7,11 @@
         <section class="user_info">
             @include('shared._user_info', ['user' => $user])
         </section>
+        <!-- 关注按钮 -->
+        <!-- 使用登录用户认证避免未登录用户也进行渲染显示关注按钮 -->
+        @if(Auth::check())
+            @include('users._follow_form')
+        @endif
         <!-- 用户统计信息 -->
         <section class="stats mt-2">
             @include('shared._stats',['user'=>$user])
