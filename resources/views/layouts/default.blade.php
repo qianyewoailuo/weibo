@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>@yield('title','Weibo APP') - Laravel入门</title>
+    <title>@yield('title','Weibo APP') - Laravel</title>
     <!-- <link rel="stylesheet" href="/css/app.css"> -->
     <!-- <link rel="stylesheet" href="/css/app.css"> -->
     <!-- Laravel是以public文件夹为根目录的，因此我们可以使用下面这行代码来为Laravel引入样式 -->

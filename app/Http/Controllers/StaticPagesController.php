@@ -12,6 +12,7 @@ class StaticPagesController extends Controller
         // 获取微博动态信息
         $feed_items = [];
         if (Auth::check()){
+            // 获取个人以及关注用户的微博动态
             $feed_items = Auth::user()->feed()->paginate(30);
         }
         return view('static_pages/home',compact('feed_items'));
