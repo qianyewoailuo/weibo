@@ -22,6 +22,9 @@ Route::get('/about','StaticPagesController@about')->name('about');
 
 // 用户注册,登录等相关路由
 Route::get('signup','UsersController@create')->name('signup');
+// 邮件激活
+Route::get('signup/confirm/{token}','UsersController@confirmEmail')->name('confirm_email');
+
 
 // 用戶资源路由
 Route::resource('users','UsersController');

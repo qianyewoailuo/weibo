@@ -29,13 +29,21 @@ class SessionsController extends Controller
             // Auth::attempt($credentials,$is_remember)
         if (Auth::attempt($credentials,$request->has('remember'))) {
             // 成功认证
-            session()->flash('success','欢迎回来!');
-            // 优化登录重定向
-            // 默认重定向地址
-            $fallback = route('users.show',[Auth::user()]);
-            // 当上次请求的记录为空时重定向到默认地址
-            return redirect()->intended($fallback);
-            // return redirect()->route('users.show',[Auth::user()]);
+            if (Auth::user()->activated) {
+                // 成功激活并登陆
+                session()->flash('success','欢迎回来!');
+                // 优化登录重定向
+                // 默认重定向地址
+                $fallback = route('users.show',[Auth::user()]);
+                // 当上次请求的记录为空时重定向到默认地址
+                return redirect()->intended($fallback);
+                // return redirect()->route('users.show',[Auth::user()]);
+            } else {
+                // 邮箱未激活
+                Auth::logout();
+                session()->flash('warning','您的账号尚未激活,请检查邮箱中的注册邮件进行激活');
+                return redirect('/');
+            }
         } else {
             // 失败认证
             session()->flash('danger','很抱歉,您的邮箱和密码不匹配');
