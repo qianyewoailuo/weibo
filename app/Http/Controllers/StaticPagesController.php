@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StaticPagesController extends Controller
 {
     public function home()
     {
-        // return '主页';
-        return view('static_pages/home');
+        // 获取微博动态信息
+        $feed_items = [];
+        if (Auth::check()){
+            $feed_items = Auth::user()->feed()->paginate(30);
+        }
+        return view('static_pages/home',compact('feed_items'));
     }
 
     public function help()
