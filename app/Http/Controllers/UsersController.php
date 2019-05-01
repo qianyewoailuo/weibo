@@ -54,8 +54,9 @@ class UsersController extends Controller
     // 显示用户个人信息
     public function show(User $user)
     {
-        // return 'show';
-        return view('users.show', compact('user'));
+        // 获取个人所有微博
+        $statuses = $user->statuses()->orderBy('created_at','desc')->paginate(10);
+        return view('users.show', compact('user','statuses'));
     }
 
     // 保存注册信息
