@@ -89,13 +89,14 @@ class UsersController extends Controller
     {
         $view = 'emails.confirm';
         $data = compact('user');
-        $from = 'qianyewoaluo@126.com';
-        $name = 'luotx';
+        // 已配置环境 不在需要from方法
+        // $from = 'qianyewoaluo@126.com';
+        // $name = 'luotx';
         $to = $user->email;
         $subject = "感谢注册 weibo 应用!请确认你的邮箱";
-
-        Mail::send($view,$data,function($message) use ($from,$name,$to,$subject) {
-            $message->from($from,$name)->to($to)->subject($subject);
+        // Mail::send($view,$data,function($message) use (/*$from,$name,*/$to,$subject)
+        Mail::send($view,$data,function($message) use ($to,$subject) {
+            $message->to($to)->subject($subject);
         });
     }
     // 邮箱激活
