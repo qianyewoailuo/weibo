@@ -39,3 +39,11 @@ Route::resource('users','UsersController');
 Route::get('login','SessionsController@create')->name('login');
 Route::post('login','SessionsController@store')->name('login');
 Route::delete('logout','SessionsController@destroy')->name('logout');
+
+// 微博动态路由
+Route::resource('statuses','StatusesController',['only'=>['store','destroy']]);
+/**
+ * POST     /statuses   StatusesController@store    处理创建微博的请求
+ * DELETE   /statuses   StatusesController@destroy	处理删除微博的请求
+ */
+

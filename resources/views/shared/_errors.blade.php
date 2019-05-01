@@ -1,3 +1,4 @@
+<!-- 验证器错误信息提示 -->
 @if (count($errors) > 0)
 <div class="alert alert-danger">
   <ul>
